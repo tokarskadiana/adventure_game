@@ -3,6 +3,8 @@
 board = []
 player = []
 icon = '@'
+
+
 def game_board(x, y):
     for row in range(x):
         board.append([])
@@ -18,20 +20,23 @@ def game_board(x, y):
         if a in item:
             player.append(item.index(icon))
             player.append(x)
-        x+=1
+        x += 1
 
     return board
+
+
 def print_game_board(board):
     for i in board:
         print(''.join(i))
 
+
 def motion():
-    player_input = 's' #input('press the key to move: _')
+    player_input = 's'   # input('press the key to move: _')
     if player_input == 's':
         player[1] += 1
         a = board[player[0]][player[1]]
     return a
 
 
-print_game_board(game_board(22,80))
+print_game_board(game_board(22, 80))
 # motion()
