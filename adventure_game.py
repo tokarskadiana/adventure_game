@@ -18,3 +18,8 @@ def print_game_board(board):
         print(''.join(i))
 
 print_game_board(game_board(22, 80))
+
+
+def motion:
+    s = input('press the key to move: _')
+    if s == 's':
