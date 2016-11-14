@@ -9,6 +9,7 @@ def game_board(x, y):
             else:
                 board[row].append('.')
     board[len(board) // 2][len(board[0]) // 2] = '@'
+    
     return board
 
 
