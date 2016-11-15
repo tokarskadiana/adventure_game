@@ -1,5 +1,6 @@
 import os
 from collections import Counter
+import sys
 
 
 class Game:
@@ -60,7 +61,8 @@ class Game:
         elif item == 'k':
             self.weapons.append('weapons')
         elif item == 'p':
-            del self.lives[-1]
+            if self.lives:
+                del self.lives[-1]
 
     def print_items(self):
         a = (Counter(self.lives), Counter(self.food), Counter(self.clothes), Counter(self.weapons))
@@ -99,6 +101,9 @@ class Game:
     def game_play(self):  # function of a gameplay, waiting for player input
         while True:
             os.system('clear')
+            if not self.lives:
+                print('You lose!!!')
+                sys.exit()
             self.print_game_board(self.board)
             print('Use A (left), S (down), D (right) and W(up) to move.\nPress E to exit.\n')
             self.print_items()
@@ -113,7 +118,7 @@ class Game:
                 self.motion(-1)
             elif player_input == 'e':
                 inp = input('Do you really want to exit? (Y/N) ').lower()
-                if inp[0] == 'y':
+                if not inp or inp[0] == 'y':
                     break
                 if inp[0] == 'n':
                     continue
