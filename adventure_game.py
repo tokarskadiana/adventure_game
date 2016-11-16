@@ -12,7 +12,7 @@ class Game:
         self.w_poss = 0
         self.obstacle = ('x', '#')
         self.item = ('l', 'f', 'c', 'k', 'p')
-        self.lives = ['lives']*5
+        self.lives = ['lives'] * 5
         self.food = []
         self.clothes = []
         self.weapons = []
@@ -21,7 +21,7 @@ class Game:
         for row in range(lenght):
             self.board.append([])
             for kolumn in range(width):
-                if row == 0 or row == lenght-1 or kolumn == 0 or kolumn == width-1:
+                if row == 0 or row == lenght - 1 or kolumn == 0 or kolumn == width - 1:
                     self.board[row].append('x')
                 else:
                     self.board[row].append('.')
@@ -39,51 +39,51 @@ class Game:
 
     def level(self, board):
         z = 10
-        for i in range(17):        #lewy hak poziomy
+        for i in range(17):  # lewy hak poziomy
             board[10][z] = '#'
             z += 1
         z = 35
-        for i in range(10):        #poziomy krzyz
+        for i in range(10):  # poziomy krzyz
             board[5][z] = '#'
             z += 1
         z = 66
-        for i in range(13):        #prawy kat (poziomy)
+        for i in range(13):  # prawy kat (poziomy)
             board[7][z] = '#'
             z += 1
         z = 54
-        for i in range(9):        #poziomy krzyz
+        for i in range(9):  # poziomy krzyz
             board[11][z] = '#'
             z += 1
         z = 62
-        for i in range(8):        #poziomy krzyz
+        for i in range(8):  # poziomy krzyz
             board[17][z] = '#'
             z += 1
         z = 36
-        for i in range(8):        #poziomy wejscie
+        for i in range(8):  # poziomy wejscie
             board[13][z] = '#'
             z += 1
         z = 36
-        for i in range(3):        #poziomy wejscie
+        for i in range(3):  # poziomy wejscie
             board[16][z] = '#'
             z += 1
         z = 41
-        for i in range(3):        #poziomy wejscie
+        for i in range(3):  # poziomy wejscie
             board[16][z] = '#'
             z += 1
         z = 3
-        for i in range(15):        #lewy dol
+        for i in range(15):  # lewy dol
             board[18][z] = '#'
             z += 1
         z = 15
-        for i in range(8):        #gorny rog
+        for i in range(8):  # gorny rog
             board[2][z] = '#'
             z += 1
         z = 15
-        for i in range(8):        #gorny rog
+        for i in range(8):  # gorny rog
             board[3][z] = '#'
             z += 1
         z = 15
-        for i in range(8):        #gorny rog
+        for i in range(8):  # gorny rog
             board[4][z] = '#'
             z += 1
         z = 1
@@ -219,5 +219,5 @@ class Game:
         self.random_item(board, self.item)
         self.insert_player(board)
         self.game_play()
-
+print(":)")
 Game().main()
