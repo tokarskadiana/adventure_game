@@ -189,8 +189,7 @@ class Game:
         while True:
             os.system('clear')
             if not self.lives:
-                print('You lose!!!')
-                sys.exit()
+                self.game_over_screen()
             self.print_game_board(self.board)
             print('Use A (left), S (down), D (right) and W(up) to move.\nPress E to exit.\n')
             self.print_items()
@@ -212,12 +211,74 @@ class Game:
             else:
                 continue
 
+    def welcome_screen(self):
+        # import background / show: menu, credits, control panel
+        while True:
+            with open('welcomescreen.txt', newline='') as screenfile:
+                welcome = screenfile.read()
+                print('\033[36m\033[92m', welcome)
+            start_input = input()
+            if start_input == 'y':
+                break
+            if start_input == 'e':
+                sys.exit()
+            if start_input == 'c':
+                self.credits_screen()
+            else:
+                continue
+
+    def game_over_screen(self):
+        while True:
+            os.system('clear')
+            with open('gameover.txt', newline='') as game_over:
+                over = game_over.read()
+                print('\033[1m\033[91m', over)
+            end_input = input()
+            if end_input == 'y':
+                self.main()
+            if end_input == 'n':
+                os.system('clear')
+                sys.exit()
+            else:
+                continue
+
+    def credits_screen(self):
+        # import background - with credits info
+        while True:
+            os.system('clear')
+            with open('credits.txt', newline='') as credits:
+                credits_page = credits.read()
+                print('\033[1m\033[95m', credits_page)
+            credits_input = input()
+            if credits_input == 'b':
+                self.main()
+            else:
+                continue
+
+    def win_screen(self):
+        # import background - congratulations!
+        while True:
+            os.system('clear')
+            with open('victoryscreen.txt', newline='') as vin:
+                vin_page = vin.read()
+                print('\033[1m\033[92m', vin_page)
+            vin_input = input()
+            if vin_input == 'y':
+                self.main()
+            if vin_input == 'n':
+                os.system('clear')
+                sys.exit()
+            else:
+                continue
+
     def main(self):
         os.system('clear')
+        self.welcome_screen()
         board = self.game_board(22, 80)
         self.level(board)
         self.random_item(board, self.item)
         self.insert_player(board)
         self.game_play()
-print(":)")
+        # self.win_screen()  trzeba ustawić kiedy ma sie pojawić WIN SCREEN
+
 Game().main()
