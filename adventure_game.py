@@ -49,56 +49,26 @@ class Game:
 
     def level_1(self, board):
         self.define_level(board, 10, 10, 17)
+        self.define_level(board, 5, 35, 10)
+        self.define_level(board, 7, 66, 13)
+        self.define_level(board, 11, 54, 9)
+        self.define_level(board, 17, 62, 8)
+        self.define_level(board, 13, 36, 8)
+        self.define_level(board, 16, 36, 3)
+        self.define_level(board, 16, 41, 3)
+        self.define_level(board, 18, 3, 15)
+        self.define_level(board, 2, 15, 8)
+        self.define_level(board, 3, 15, 8)
+        self.define_level(board, 4, 15, 8)
+        self.define_level(board, 1, 63, 5, True)
+        self.define_level(board, 3, 40, 5, True)
+        self.define_level(board, 5, 9, 6, True)
+        self.define_level(board, 11, 62, 7, True)
+        self.define_level(board, 14, 36, 3, True)
+        self.define_level(board, 14, 43, 3, True)
+        self.define_level(board, 16, 17, 2, True)
+         # self.level
 
-    # self.level
-    #     z = 10
-    #     for i in range(17):  # lewy hak poziomy
-    #         board[10][z] = '#'
-    #         z += 1
-    #     z = 35
-    #     for i in range(10):  # poziomy krzyz
-    #         board[5][z] = '#'
-    #         z += 1
-    #     z = 66
-    #     for i in range(13):  # prawy kat (poziomy)
-    #         board[7][z] = '#'
-    #         z += 1
-    #     z = 54
-    #     for i in range(9):  # poziomy krzyz
-    #         board[11][z] = '#'
-    #         z += 1
-    #     z = 62
-    #     for i in range(8):  # poziomy krzyz
-    #         board[17][z] = '#'
-    #         z += 1
-    #     z = 36
-    #     for i in range(8):  # poziomy wejscie
-    #         board[13][z] = '#'
-    #         z += 1
-    #     z = 36
-    #     for i in range(3):  # poziomy wejscie
-    #         board[16][z] = '#'
-    #         z += 1
-    #     z = 41
-    #     for i in range(3):  # poziomy wejscie
-    #         board[16][z] = '#'
-    #         z += 1
-    #     z = 3
-    #     for i in range(15):  # lewy dol
-    #         board[18][z] = '#'
-    #         z += 1
-    #     z = 15
-    #     for i in range(8):  # gorny rog
-    #         board[2][z] = '#'
-    #         z += 1
-    #     z = 15
-    #     for i in range(8):  # gorny rog
-    #         board[3][z] = '#'
-    #         z += 1
-    #     z = 15
-    #     for i in range(8):  # gorny rog
-    #         board[4][z] = '#'
-    #         z += 1
     #     z = 1
     #     for i in range(5):      # prawy pionowy gorny
     #         board[z][63] = '#'
@@ -289,6 +259,7 @@ class Game:
         self.welcome_screen()
         board = self.game_board(22, 80)
         self.random_item(board, self.item)
+        self.level_1(board)
         self.insert_player(board)
         self.game_play()
         # self.win_screen()  trzeba ustawić kiedy ma sie pojawić WIN SCREEN
