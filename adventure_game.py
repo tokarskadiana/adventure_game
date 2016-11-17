@@ -251,7 +251,7 @@ class Game:
         while True:
             with open('welcomescreen.txt', newline='') as screenfile:
                 welcome = screenfile.read()
-                print('\033[36m\033[92m', welcome, '\033[0m')
+                print('\033[36m\033[92m{}\033[0m'.format(welcome))
             start_input = input()
             if start_input == 'y':
                 os.system('clear')
@@ -362,13 +362,11 @@ class Game:
         self.level(1)
         self.level_2_screen()
         self.level(2)
-        hang()
-        self.level_3_screen()
-        # self.boss_appear()
-        self.level(2)
         t = hang(self.sum_items)
         if t:
             self.game_over_screen()
+        self.level_3_screen()
+        # self.boss_appear()
         self.level(3)
         self.win_screen()
 
