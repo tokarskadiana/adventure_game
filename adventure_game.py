@@ -127,21 +127,37 @@ class Game:
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
 
-#     def boss_appear():
-#         boss = '|o,o|'
-#         ['.', '^', '-', '^', '.']
-#         board[10][10] = boss
-#         # i = 0
-#         # x = 2
-#         # for i in range(5):
-#         #         board[x][10] = boss[i]
-#         #         x += 1
-#         #         i += 1
-# #         ] * 4
-# #         print(
-# # |o,o|
-# # \ _ /
-# #  ***')
+    def boss_appear(self, board, x, y):
+        boss = [['.', '^', '-', '^', '.'],
+                ['|', 'o', ',', 'o', '|'],
+                ['\ ', ' ', ' ', '', '/'],
+                ["'", '*', '*', '*', "'"],
+                ]
+
+        i = 0
+        x = 2
+        for num in range(5):
+                board[10][x] = boss[0][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[11][x] = boss[1][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[12][x] = boss[2][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[13][x] = boss[3][i]
+                x += 1
+                i += 1
 
     def insert_player(self, board):     # make a player icon and set a coordinates
         board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
@@ -335,6 +351,7 @@ class Game:
             self.level_2(board)
         if level == 3:
             self.level_3(board)
+            self.boss_appear(self.board)
         self.insert_player(board)
         self.game_play()
 
@@ -359,16 +376,25 @@ class Game:
         os.system('clear')
         self.lives = ['lives 💜'] * 5
         self.welcome_screen()
+<< << << < HEAD
+
+== == == =
         self.level(1)
         self.level_2_screen()
         self.level(2)
         t = hang(self.sum_items)
         if t:
             self.game_over_screen()
+<< << << < HEAD
         self.level_3_screen()
         # self.boss_appear()
+== == == =
+>>>>>> > cb28359504e7a4ec8ac147c78dc07d0f2b4bfdf8
+>>>>>> > cfdba630203cd10cc7d115178e6fc06f8141a3da
         self.level(3)
         self.win_screen()
+
+
 
     if __name__ == 'main':
         self.main()

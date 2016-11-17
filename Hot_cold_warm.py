@@ -12,15 +12,18 @@ def random_input():
             pass
     random_num = str(x[0]) + str(x[1]) + str(x[2])
     random_num = str(random_num)
+    print(random_num)
     return random_num
 
 def number_guess():
     random_num = random_input() 
-    guess = 0
+    guess = ''
     while guess != random_num:
         hints = []
-        guess = input('Chose the number: ') 
-        if len(guess) == 3 and guess.isnumeric():
+        guess = str(input('Chose the number: ')) 
+        guess = str(guess)
+        print(type(guess))
+        if len(guess) == 3 and guess.isdigit():
             if guess == random_num: 
                 break
             i = 0
