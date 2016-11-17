@@ -123,6 +123,22 @@ class Game:
         self.define_level(board, 6, 67, 8, True)
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
+    
+    def boss_appear():
+        boss = '|o,o|'
+        ['.', '^', '-', '^', '.']
+        board[10][10] = boss
+        # i = 0
+        # x = 2
+        # for i in range(5):
+        #         board[x][10] = boss[i]
+        #         x += 1
+        #         i += 1
+#         ] * 4
+#         print(
+# |o,o|
+# \ _ /
+#  ***')
 
     def insert_player(self, board):     # make a player icon and set a coordinates
         board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
@@ -315,6 +331,7 @@ class Game:
         self.lives = ['lives 💜']*5
         self.welcome_screen()
         self.level(1)
+        self.boss_appear()
         self.level(2)
         hang()
         self.level(3)
