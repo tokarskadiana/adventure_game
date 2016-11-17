@@ -3,6 +3,8 @@ from collections import Counter
 import sys
 import random
 from hung import hang
+import time
+
 
 class Game:
 
@@ -217,6 +219,7 @@ class Game:
             elif player_input == 'e':
                 inp = input('Do you really want to exit? (Y/N) ').lower()
                 if not inp or inp[0] == 'y':
+                    os.system('clear')
                     sys.exit()
                 else:
                     continue
@@ -231,6 +234,12 @@ class Game:
                 print('\033[36m\033[92m', welcome, '\033[0m')
             start_input = input()
             if start_input == 'y':
+                os.system('clear')
+                with open('level1.txt', newline='') as level_1:
+                    level = level_1.read()
+                    print('\033[1m\033[95m', level)
+                    time.sleep(3)
+                    os.system('clear')
                 break
             if start_input == 'e':
                 sys.exit()
@@ -309,14 +318,32 @@ class Game:
         self.insert_player(board)
         self.game_play()
 
+    def level_2_screen(self):
+        os.system('clear')
+        with open('level2.txt', newline='') as level_2:
+            level = level_2.read()
+            print('\033[1m\033[95m', level)
+        time.sleep(3)
+        os.system('clear')
+
+    def level_3_screen(self):
+        os.system('clear')
+        with open('level3.txt', newline='') as level_3:
+            level = level_3.read()
+            print('\033[1m\033[95m', level)
+        time.sleep(3)
+        os.system('clear')
+
     def main(self):
         self.reset()
         os.system('clear')
-        self.lives = ['lives 💜']*5
+        self.lives = ['lives 💜'] * 5
         self.welcome_screen()
         self.level(1)
+        self.level_2_screen()
         self.level(2)
         hang()
+        self.level_3_screen()
         self.level(3)
         self.win_screen()
 

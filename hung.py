@@ -1,5 +1,6 @@
 import random
 import os
+import time
 
 
 def make_capitals():
@@ -20,11 +21,25 @@ def make_dashes(capital):
     return cap_name_output
 
 
+def introduce():
+    os.system('clear')
+    with open('boss.txt', newline='') as boss:
+        level = boss.read()
+        print('\033[1m\033[91m', level)
+        print('\033[91m''''To pass this level, you have to guess
+the capital of European country
+Have a try!!! Ha ha ha!''')
+    time.sleep(4)
+    os.system('clear')
+
+
 def game(capital, dash):
     not_in_word = []
     while True:
         os.system("clear")
-        print(capital)
+        with open('boss.txt', newline='') as boss:
+            level = boss.read()
+            print('\033[1m\033[91m', level)
         if not_in_word != []:
             print("Used letters: " + ', '.join(not_in_word))
         print('\n' + '\033[1m' + ''.join(dash) + '\033[0m' + '\n')
@@ -36,10 +51,18 @@ def game(capital, dash):
                 if i == inp:
                     dash[letter] = inp
         else:
+            os.system("clear")
+            with open('boss.txt', newline='') as boss:
+                level = boss.read()
+                print('\033[1m\033[91m', level)
+            print('''ohhhh!! You did it!!
+Next time I will win!!''')
+            time.sleep(4)
             break
 
 
 def hang():
     capital = make_capitals()
     dash = make_dashes(capital)
+    introduce()
     game(capital, dash)
