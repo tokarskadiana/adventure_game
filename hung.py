@@ -44,6 +44,7 @@ def game(capital, dash, lives):
         with open('boss.txt', newline='') as boss:
             level = boss.read()
             print('\033[1m\033[91m', level)
+        print('You have {} attempts.'.format(lives))
         if not_in_word != []:
             print("Used letters: " + ', '.join(not_in_word))
         print('\n' + '\033[1m' + ''.join(dash) + '\033[0m' + '\n')

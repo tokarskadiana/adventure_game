@@ -12,8 +12,7 @@ class Game:
         self.board = []
         self.l_poss = 0
         self.w_poss = 0
-        self.obstacle = ('░', '🔷')
-        self.boss = ('.', '/', )
+        self.obstacle = ('░', '🔷', '.', '/', "\\", '|', '-', '^', "'", '*')
         self.item = ('💜', '🍙', '👘', '🔰', '👿')
         self.lives = []
         self.food = []
@@ -62,7 +61,6 @@ class Game:
                 y += 1
 
     def level_1(self, board):
-        i = self.obstacle[1]
         self.define_level(board, 10, 10, 17)
         self.define_level(board, 5, 35, 10)
         self.define_level(board, 7, 66, 13)
@@ -128,7 +126,7 @@ class Game:
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
 
-    def boss_appear(self, board, x, y):
+    def boss_appear(self, board):
         boss = [['.', '^', '-', '^', '.'],
                 ['|', 'o', ',', 'o', '|'],
                 ['\ ', ' ', ' ', '', '/'],
@@ -136,30 +134,35 @@ class Game:
         i = 0
         x = 2
         for num in range(5):
-                board[10][x] = boss[0][i]
-                x += 1
-                i += 1
+            board[10][x] = boss[0][i]
+            x += 1
+            i += 1
         i = 0
         x = 2
         for num in range(5):
-                board[11][x] = boss[1][i]
-                x += 1
-                i += 1
+            board[11][x] = boss[1][i]
+            x += 1
+            i += 1
         i = 0
         x = 2
         for num in range(5):
-                board[12][x] = boss[2][i]
-                x += 1
-                i += 1
+            board[12][x] = boss[2][i]
+            x += 1
+            i += 1
         i = 0
         x = 2
         for num in range(5):
-                board[13][x] = boss[3][i]
-                x += 1
-                i += 1
+            board[13][x] = boss[3][i]
+            x += 1
+            i += 1
 
-    def insert_player(self, board):     # make a player icon and set a coordinates
-        board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
+    def insert_player(self, board, level):     # make a player icon and set a coordinates
+        if level == 1:
+            board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
+        if level == 2:
+            board[2][-75] = '🐼'
+        if level == 3:
+            board[10][-5] = '🐼'
         n = 0
         for item in board:
             if '🐼' in item:
@@ -229,6 +232,7 @@ class Game:
 
     def game_play(self):  # function of a gameplay, waiting for player input
         while True:
+            bs = ('.', '/', '|', '-', '^', "'", '*')
             os.system('clear')
             if not self.lives:
                 self.game_over_screen()
@@ -238,6 +242,14 @@ class Game:
                 self.sum_items[0] += len(self.food)
                 self.sum_items[1] += len(self.clothes)
                 self.sum_items[2] += len(self.weapons)
+                break
+            if self.board[self.l_poss][self.w_poss - 1] in bs:
+                break
+            elif self.board[self.l_poss][self.w_poss + 1] in bs:
+                break
+            elif self.board[self.l_poss - 1][self.w_poss] in bs:
+                break
+            elif self.board[self.l_poss + 1][self.w_poss] in bs:
                 break
             self.print_game_board(self.board)
             print('Use A (left), S (down), D (right) and W(up) to move.\nPress E to exit.\n')
@@ -346,12 +358,14 @@ class Game:
         self.random_item(board, self.item)
         if level == 1:
             self.level_1(board)
+            self.insert_player(board, 1)
         if level == 2:
             self.level_2(board)
+            self.insert_player(board, 2)
         if level == 3:
             self.level_3(board)
             self.boss_appear(self.board)
-        self.insert_player(board)
+            self.insert_player(board, 3)
         self.game_play()
 
     def level_2_screen(self):
@@ -374,15 +388,16 @@ class Game:
         self.reset()
         os.system('clear')
         self.lives = ['lives 💜'] * 5
-        self.welcome_screen()
-        self.level(1)
-        self.level_2_screen()
-        self.level(2)
-        t = hang(self.sum_items)
-        if t:
-            self.game_over_screen()
+        # self.welcome_screen()
+        # self.level(1)
+        # self.level_2_screen()
+        # self.level(2)
+        # t = hang(self.sum_items)
+        # if t:
+        #     self.game_over_screen()
         self.level_3_screen()
         self.level(3)
+        # hot_cold()
         self.win_screen()
 
     if __name__ == 'main':
