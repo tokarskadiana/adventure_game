@@ -1,49 +1,70 @@
 import random
+import os
+import time
+
 x = []
 i = 0
 items = 0
 
+
 def random_input():
     while len(x) < 3:
-        number = random.choice(list(range(0,10)))
+        number = random.choice(list(range(0, 10)))
         if number not in x:
             x.append(number)
         else:
             pass
     random_num = str(x[0]) + str(x[1]) + str(x[2])
     random_num = str(random_num)
-    print(random_num)
     return random_num
 
+
+def introduce():
+    os.system('clear')
+    with open('boss.txt', newline='') as boss:
+        level = boss.read()
+        print('\033[1m\033[91m{}'.format(level))
+        print('\033[91m''''Welcome back!!
+This time I have a new game for you...
+Hot-Warm-Cold -> i think about 3-digit number
+Try to guess...''')
+    time.sleep(5)
+    os.system('clear')
+
+
 def number_guess():
-    random_num = random_input() 
+    random_num = random_input()
     guess = ''
     while guess != random_num:
         hints = []
-        guess = str(input('Chose the number: ')) 
+        guess = str(input('Chose the number: '))
         guess = str(guess)
-        print(type(guess))
         if len(guess) == 3 and guess.isdigit():
-            if guess == random_num: 
+            if guess == random_num:
                 break
             i = 0
             while i < len(random_num):
                 if guess[i] in random_num:
-                    if guess[i] == random_num[i]:  
-                        hints.append('hot')
+                    if guess[i] == random_num[i]:
+                        hints.insert(0, 'hot')
                     else:
                         hints.append('warm')
                 else:
                     pass
-                i += 1        
+                i += 1
             if len(hints) == 0:
-                print('cold')  
+                print('cold')
             else:
                 print(" ".join(hints))
         else:
             print('Please, type 3-digit value.')
-    print('win!')
+    os.system('clear')
+    with open('boss.txt', newline='') as boss:
+        level = boss.read()
+        print('\033[1m\033[91m{}'.format(level))
+    print('''Yes! %s is correct number!
+    You WIN again!!!''' % random_num)
+    time.sleep(4)
 
-
-
+introduce()
 number_guess()

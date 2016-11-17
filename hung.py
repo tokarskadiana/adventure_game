@@ -25,7 +25,7 @@ def introduce():
     os.system('clear')
     with open('boss.txt', newline='') as boss:
         level = boss.read()
-        print('\033[1m\033[91m', level)
+        print('\033[1m\033[91m{}'.format(level))
         print('\033[91m''''To pass this level, you have to guess
 the capital of European country
 Have a try!!! Ha ha ha!''')
@@ -43,7 +43,7 @@ def game(capital, dash, lives):
         os.system("clear")
         with open('boss.txt', newline='') as boss:
             level = boss.read()
-            print('\033[1m\033[91m', level)
+            print('\033[1m\033[91m{}'.format(level))
         if not_in_word != []:
             print("Used letters: " + ', '.join(not_in_word))
         print('\n' + '\033[1m' + ''.join(dash) + '\033[0m' + '\n')
@@ -59,7 +59,7 @@ def game(capital, dash, lives):
             os.system("clear")
             with open('boss.txt', newline='') as boss:
                 level = boss.read()
-                print('\033[1m\033[91m', level)
+                print('\033[1m\033[91m{}'.format(level))
             print('''ohhhh!! You did it!!
 Next time I will win!!''')
             time.sleep(4)
