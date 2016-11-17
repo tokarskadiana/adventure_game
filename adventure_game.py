@@ -128,13 +128,35 @@ class Game:
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
 
-    def boss_appear(self, board):
-        # board[6][10] = '.'
-        # board[6][11] = '^'
-        # board[6][12] = '-'
-        # board[6][13] = '^'
-        # board[6][14] = '.'
-        pass
+    def boss_appear(self, board, x, y):
+        boss = [['.', '^', '-', '^', '.'],
+                ['|', 'o', ',', 'o', '|'],
+                ['\ ', ' ', ' ', '', '/'],
+                ["'", '*', '*', '*', "'"]]
+        i = 0
+        x = 2
+        for num in range(5):
+                board[10][x] = boss[0][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[11][x] = boss[1][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[12][x] = boss[2][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[13][x] = boss[3][i]
+                x += 1
+                i += 1
 
     def insert_player(self, board):     # make a player icon and set a coordinates
         board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
