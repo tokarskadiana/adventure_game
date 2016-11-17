@@ -4,6 +4,7 @@ import sys
 import random
 from hung import hang
 
+
 class Game:
 
     def __init__(self):     # initialize a class variables
@@ -124,22 +125,14 @@ class Game:
         self.define_level(board, 6, 67, 8, True)
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
-    
-    def boss_appear():
-        boss = '|o,o|'
-        ['.', '^', '-', '^', '.']
-        board[10][10] = boss
-        # i = 0
-        # x = 2
-        # for i in range(5):
-        #         board[x][10] = boss[i]
-        #         x += 1
-        #         i += 1
-#         ] * 4
-#         print(
-# |o,o|
-# \ _ /
-#  ***')
+
+    def boss_appear(self, board):
+        # board[6][10] = '.'
+        # board[6][11] = '^'
+        # board[6][12] = '-'
+        # board[6][13] = '^'
+        # board[6][14] = '.'
+        pass
 
     def insert_player(self, board):     # make a player icon and set a coordinates
         board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
@@ -326,6 +319,7 @@ class Game:
             self.level_2(board)
         if level == 3:
             self.level_3(board)
+            self.boss_appear(self.board)
         self.insert_player(board)
         self.game_play()
 
@@ -334,12 +328,11 @@ class Game:
         os.system('clear')
         self.lives = ['lives 💜']*5
         self.welcome_screen()
-        self.level(1)
-        self.boss_appear()
-        self.level(2)
-        t = hang(self.sum_items)
-        if t:
-            self.game_over_screen()
+        # self.level(1)
+        # self.level(2)
+        # t = hang(self.sum_items)
+        # if t:
+        #     self.game_over_screen()
         self.level(3)
         self.win_screen()
 
