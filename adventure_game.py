@@ -3,6 +3,8 @@ from collections import Counter
 import sys
 import random
 from hung import hang
+import time
+
 
 class Game:
 
@@ -16,6 +18,7 @@ class Game:
         self.food = []
         self.clothes = []
         self.weapons = []
+        self.sum_items = [0, 0, 0]
 
     def game_board(self, lenght, width):    # make a game board
         for row in range(lenght):
@@ -123,6 +126,7 @@ class Game:
         self.define_level(board, 6, 67, 8, True)
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
+<<<<<<< HEAD
     
     def boss_appear(self, board, x, y):
         boss = [['.', '^', '-', '^', '.'],
@@ -170,10 +174,8 @@ class Game:
         #         board[10][x] = boss[2][i]
         #         x += 1
         #         i += 1
-        
-# |o,o|
-# \ _ /
-#  ***')
+  
+>>>>>>> cb28359504e7a4ec8ac147c78dc07d0f2b4bfdf8
 
     def insert_player(self, board):     # make a player icon and set a coordinates
         board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
@@ -252,6 +254,9 @@ class Game:
                 break
             i_n = self.item_number()
             if sum(i_n) == 0:
+                self.sum_items[0] += len(self.food)
+                self.sum_items[1] += len(self.clothes)
+                self.sum_items[2] += len(self.weapons)
                 break
             self.print_game_board(self.board)
             print('Use A (left), S (down), D (right) and W(up) to move.\nPress E to exit.\n')
@@ -268,6 +273,7 @@ class Game:
             elif player_input == 'e':
                 inp = input('Do you really want to exit? (Y/N) ').lower()
                 if not inp or inp[0] == 'y':
+                    os.system('clear')
                     sys.exit()
                 else:
                     continue
@@ -282,6 +288,12 @@ class Game:
                 print('\033[36m\033[92m', welcome, '\033[0m')
             start_input = input()
             if start_input == 'y':
+                os.system('clear')
+                with open('level1.txt', newline='') as level_1:
+                    level = level_1.read()
+                    print('\033[1m\033[95m', level)
+                    time.sleep(3)
+                    os.system('clear')
                 break
             if start_input == 'e':
                 sys.exit()
@@ -339,7 +351,7 @@ class Game:
 
     def reset(self):
         dic = vars(self)
-        no_edit = ['obstacle', 'item', 'lives']
+        no_edit = ['obstacle', 'item', 'lives', 'sum_items']
         to_zero = ['l_poss', 'w_poss']
         for i in dic.keys():
             if i in to_zero:
@@ -361,14 +373,41 @@ class Game:
         self.insert_player(board)
         self.game_play()
 
+    def level_2_screen(self):
+        os.system('clear')
+        with open('level2.txt', newline='') as level_2:
+            level = level_2.read()
+            print('\033[1m\033[95m', level)
+        time.sleep(3)
+        os.system('clear')
+
+    def level_3_screen(self):
+        os.system('clear')
+        with open('level3.txt', newline='') as level_3:
+            level = level_3.read()
+            print('\033[1m\033[95m', level)
+        time.sleep(3)
+        os.system('clear')
+
     def main(self):
         self.reset()
         os.system('clear')
-        self.lives = ['lives 💜']*5
+        self.lives = ['lives 💜'] * 5
         self.welcome_screen()
-        # self.level(1)       
-        # self.level(2)
-        # hang()
+<<<<<<< HEAD
+        
+=======
+        self.level(1)
+        self.level_2_screen()
+        self.level(2)
+        hang()
+        self.level_3_screen()
+        # self.boss_appear()
+        self.level(2)
+        t = hang(self.sum_items)
+        if t:
+            self.game_over_screen()
+>>>>>>> cb28359504e7a4ec8ac147c78dc07d0f2b4bfdf8
         self.level(3)
         self.win_screen()
 
