@@ -23,10 +23,10 @@ def make_dashes(capital):
 
 def introduce():
     os.system('clear')
-    with open('boss.txt', newline='') as boss:
+    with open('skullface.txt', newline='') as boss:
         level = boss.read()
-        print('\033[1m\033[91m{}'.format(level))
-        print('\033[91m''''To pass this level, you have to guess
+        print('\033[1m\033[91m{}\033[0m'.format(level))
+        print(''''\n'To pass this level, you have to guess
 the capital of European country
 Have a try!!! Ha ha ha!''')
     time.sleep(4)
@@ -41,9 +41,9 @@ def game(capital, dash, lives):
             return True
             break
         os.system("clear")
-        with open('boss.txt', newline='') as boss:
+        with open('skullface.txt', newline='') as boss:
             level = boss.read()
-            print('\033[1m\033[91m{}'.format(level))
+            print('\033[1m\033[91m{}\033[0m'.format(level))
         if not_in_word != []:
             print("Used letters: " + ', '.join(not_in_word))
         print('\n' + '\033[1m' + ''.join(dash) + '\033[0m' + '\n')
@@ -57,9 +57,9 @@ def game(capital, dash, lives):
                     dash[letter] = inp
         else:
             os.system("clear")
-            with open('boss.txt', newline='') as boss:
+            with open('skullface.txt', newline='') as boss:
                 level = boss.read()
-                print('\033[1m\033[91m{}'.format(level))
+                print('\033[1m\033[91m{}\033[0m'.format(level))
             print('''ohhhh!! You did it!!
 Next time I will win!!''')
             time.sleep(4)
