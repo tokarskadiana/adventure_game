@@ -13,6 +13,7 @@ class Game:
         self.l_poss = 0
         self.w_poss = 0
         self.obstacle = ('░', '🔷')
+        self.boss = ('.', '/', )
         self.item = ('💜', '🍙', '👘', '🔰', '👿')
         self.lives = []
         self.food = []
@@ -249,7 +250,7 @@ class Game:
                 os.system('clear')
                 with open('level1.txt', newline='') as level_1:
                     level = level_1.read()
-                    print('\033[1m\033[95m', level)
+                    print('\033[1m\033[95m', level, '\033[0m')
                     time.sleep(3)
                     os.system('clear')
                 break
@@ -335,7 +336,7 @@ class Game:
         os.system('clear')
         with open('level2.txt', newline='') as level_2:
             level = level_2.read()
-            print('\033[1m\033[95m', level)
+            print('\033[1m\033[95m', level, '\033[0m')
         time.sleep(3)
         os.system('clear')
 
@@ -343,7 +344,7 @@ class Game:
         os.system('clear')
         with open('level3.txt', newline='') as level_3:
             level = level_3.read()
-            print('\033[1m\033[95m', level)
+            print('\033[1m\033[95m', level, '\033[0m')
         time.sleep(3)
         os.system('clear')
 
@@ -355,12 +356,10 @@ class Game:
         self.level(1)
         self.level_2_screen()
         self.level(2)
-        hang()
-        self.level_3_screen()
-        self.level(2)
         t = hang(self.sum_items)
         if t:
             self.game_over_screen()
+        self.level_3_screen()
         self.level(3)
         self.win_screen()
 
