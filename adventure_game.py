@@ -273,7 +273,7 @@ class Game:
                 os.system('clear')
                 with open('level1.txt', newline='') as level_1:
                     level = level_1.read()
-                    print('\033[1m\033[95m', level)
+                    print('\033[1m\033[95m{}\033[0m'.format(level))
                     time.sleep(3)
                     os.system('clear')
                 break
@@ -290,7 +290,7 @@ class Game:
             os.system('clear')
             with open('gameover.txt', newline='') as game_over:
                 over = game_over.read()
-                print('\033[1m\033[91m', over, '\033[0m')
+                print('\033[1m\033[91m{}\033[0m'.format(over))
             end_input = input()
             if end_input == 'y':
                 self.main()
@@ -307,7 +307,7 @@ class Game:
             os.system('clear')
             with open('credits.txt', newline='') as credits:
                 credits_page = credits.read()
-                print('\033[1m\033[95m', credits_page, '\033[0m')
+                print('\033[1m\033[95m{}\033[0m'.format(credits_page))
             credits_input = input()
             if credits_input == 'b':
                 self.main()
@@ -321,7 +321,7 @@ class Game:
             os.system('clear')
             with open('victoryscreen.txt', newline='') as vin:
                 vin_page = vin.read()
-                print('\033[1m\033[92m', vin_page, '\033[0m')
+                print('\033[1m\033[92m{}\033[0m'.format(vin_page))
             vin_input = input()
             if vin_input == 'y':
                 self.main()
@@ -359,7 +359,7 @@ class Game:
         os.system('clear')
         with open('level2.txt', newline='') as level_2:
             level = level_2.read()
-            print('\033[1m\033[95m', level)
+            print('\033[1m\033[95m{}\033[0m'.format(level))
         time.sleep(3)
         os.system('clear')
 
@@ -367,7 +367,7 @@ class Game:
         os.system('clear')
         with open('level3.txt', newline='') as level_3:
             level = level_3.read()
-            print('\033[1m\033[95m', level)
+            print('\033[1m\033[95m{}\033[0m'.format(level))
         time.sleep(3)
         os.system('clear')
 
