@@ -18,6 +18,7 @@ class Game:
         self.food = []
         self.clothes = []
         self.weapons = []
+        self.sum_items = [0, 0, 0]
 
     def game_board(self, lenght, width):    # make a game board
         for row in range(lenght):
@@ -126,6 +127,22 @@ class Game:
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
 
+#     def boss_appear():
+#         boss = '|o,o|'
+#         ['.', '^', '-', '^', '.']
+#         board[10][10] = boss
+#         # i = 0
+#         # x = 2
+#         # for i in range(5):
+#         #         board[x][10] = boss[i]
+#         #         x += 1
+#         #         i += 1
+# #         ] * 4
+# #         print(
+# # |o,o|
+# # \ _ /
+# #  ***')
+
     def insert_player(self, board):     # make a player icon and set a coordinates
         board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
         n = 0
@@ -203,6 +220,9 @@ class Game:
                 break
             i_n = self.item_number()
             if sum(i_n) == 0:
+                self.sum_items[0] += len(self.food)
+                self.sum_items[1] += len(self.clothes)
+                self.sum_items[2] += len(self.weapons)
                 break
             self.print_game_board(self.board)
             print('Use A (left), S (down), D (right) and W(up) to move.\nPress E to exit.\n')
@@ -297,7 +317,7 @@ class Game:
 
     def reset(self):
         dic = vars(self)
-        no_edit = ['obstacle', 'item', 'lives']
+        no_edit = ['obstacle', 'item', 'lives', 'sum_items']
         to_zero = ['l_poss', 'w_poss']
         for i in dic.keys():
             if i in to_zero:
@@ -344,6 +364,11 @@ class Game:
         self.level(2)
         hang()
         self.level_3_screen()
+        # self.boss_appear()
+        self.level(2)
+        t = hang(self.sum_items)
+        if t:
+            self.game_over_screen()
         self.level(3)
         self.win_screen()
 
