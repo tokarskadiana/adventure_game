@@ -6,7 +6,6 @@ from hung import hang
 import time
 
 
-
 class Game:
 
     def __init__(self):     # initialize a class variables
@@ -353,24 +352,15 @@ class Game:
         os.system('clear')
         self.lives = ['lives 💜'] * 5
         self.welcome_screen()
-<<<<<<< HEAD
-        # self.level(1)
-        # self.level(2)
-        # t = hang(self.sum_items)
-        # if t:
-        #     self.game_over_screen()
-=======
         self.level(1)
         self.level_2_screen()
         self.level(2)
         hang()
         self.level_3_screen()
-        # self.boss_appear()
         self.level(2)
         t = hang(self.sum_items)
         if t:
             self.game_over_screen()
->>>>>>> cb28359504e7a4ec8ac147c78dc07d0f2b4bfdf8
         self.level(3)
         self.win_screen()
 
