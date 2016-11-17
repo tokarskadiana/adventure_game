@@ -124,18 +124,53 @@ class Game:
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
     
-    def boss_appear():
-        boss = '|o,o|'
-        ['.', '^', '-', '^', '.']
-        board[10][10] = boss
+    def boss_appear(self, board, x, y):
+        boss = [['.', '^', '-', '^', '.'],
+                ['|', 'o', ',', 'o', '|'],
+                ['\ ', ' ', ' ', '', '/'],
+                ["'", '*', '*', '*', "'"],
+                                          ]
+
+        # board[10][10] = '^'
+        # board[10][11] = '-'
+        # board[10][12] = '.'
+        # board[10][13] = '^'
+        # board[10][14] = '.'
+        i = 0
+        x = 2
+        for num in range(5):
+                board[10][x] = boss[0][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[11][x] = boss[1][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[12][x] = boss[2][i]
+                x += 1
+                i += 1
+        i = 0
+        x = 2
+        for num in range(5):
+                board[13][x] = boss[3][i]
+                x += 1
+                i += 1
         # i = 0
         # x = 2
-        # for i in range(5):
-        #         board[x][10] = boss[i]
+        # for num in range(5):
+        #         board[14][x] = boss[4][i]
         #         x += 1
         #         i += 1
-#         ] * 4
-#         print(
+        # for num in range(5):
+        #         board[10][x] = boss[2][i]
+        #         x += 1
+        #         i += 1
+        
 # |o,o|
 # \ _ /
 #  ***')
@@ -322,6 +357,7 @@ class Game:
             self.level_2(board)
         if level == 3:
             self.level_3(board)
+            self.boss_appear(self.board)
         self.insert_player(board)
         self.game_play()
 
@@ -330,12 +366,13 @@ class Game:
         os.system('clear')
         self.lives = ['lives 💜']*5
         self.welcome_screen()
-        self.level(1)
-        self.boss_appear()
-        self.level(2)
-        hang()
+        # self.level(1)       
+        # self.level(2)
+        # hang()
         self.level(3)
         self.win_screen()
+
+
 
     if __name__ == 'main':
         self.main()
