@@ -21,7 +21,7 @@ def random_input():
 
 def introduce():
     os.system('clear')
-    with open('boss.txt', newline='') as boss:
+    with open('skullface.txt', newline='') as boss:
         level = boss.read()
         print('\033[1m\033[91m{}'.format(level))
         print('\033[91m''''Welcome back!!
@@ -63,7 +63,7 @@ def number_guess(lives):
         else:
             print('Please, type 3-digit value.')
     os.system('clear')
-    with open('boss.txt', newline='') as boss:
+    with open('skullface.txt', newline='') as boss:
         level = boss.read()
         print('\033[1m\033[91m{}'.format(level))
     print('''Yes! %s is correct number!
