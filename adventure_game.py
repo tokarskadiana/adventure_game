@@ -31,7 +31,7 @@ class Game:
                     self.board[row].append(' ')
         return self.board
 
-    def random_item(self, board, item):
+    def random_item(self, board, item):  # set random position of items
         for z in range(10):
             for i in item:
                 x = random.randint(0, (len(board) - 1))
@@ -61,7 +61,7 @@ class Game:
                 board[x][y] = '🔷'
                 y += 1
 
-    def level_1(self, board):
+    def level_1(self, board):  # set the obstacles
         self.define_level(board, 10, 10, 17)
         self.define_level(board, 5, 35, 10)
         self.define_level(board, 7, 66, 13)
@@ -82,7 +82,7 @@ class Game:
         self.define_level(board, 14, 43, 3, True)
         self.define_level(board, 16, 17, 2, True)
 
-    def level_2(self, board):
+    def level_2(self, board):  # obstacles on lvl2
         self.define_level(board, 5, 10, 69)
         self.define_level(board, 6, 10, 69)
         self.define_level(board, 11, 1, 69)
@@ -111,7 +111,7 @@ class Game:
         self.define_level(board, 8, 73, 9, True)
         self.define_level(board, 8, 74, 9, True)
 
-    def level_3(self, board):
+    def level_3(self, board):   # obstacles on lvl3
         self.define_level(board, 1, 19, 13, True)
         self.define_level(board, 1, 21, 13, True)
         self.define_level(board, 1, 20, 13, True)
@@ -127,7 +127,7 @@ class Game:
         self.define_level(board, 8, 52, 8, True)
         self.define_level(board, 8, 51, 8, True)
 
-    def boss_appear(self, board):
+    def boss_appear(self, board):  # set position of boss on lvl3 map
         boss = [['.', '^', '-', '^', '.'],
                 ['|', 'o', ',', 'o', '|'],
                 ['\ ', ' ', ' ', '', '/'],
@@ -171,7 +171,7 @@ class Game:
                 self.w_poss = item.index('🐼')
             n += 1
 
-    def getch(self):    # don't know what the f*king sh*t is this, but it works
+    def getch(self):    # don't know what is this, but it works
         import sys
         import tty
         import termios
@@ -184,7 +184,7 @@ class Game:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 
-    def catch_item(self, item):
+    def catch_item(self, item):  # adds collected items to lists
         if item == '💜':
             self.lives.append('lives 💜')
         elif item == '🍙':
@@ -197,13 +197,13 @@ class Game:
             if self.lives:
                 del self.lives[-1]
 
-    def print_items(self):
+    def print_items(self):  # print collected items on game screen
         a = (Counter(self.lives), Counter(self.food), Counter(self.clothes), Counter(self.weapons))
         for item in a:
             for key, value in item.items():
                 print(key.capitalize(), ' - ', value)
 
-    def motion(self, n, z=False):   # make a player icon do not do out of board
+    def motion(self, n, z=False):   # make a player icon do not go out of board
         if z:
             if self.board[self.l_poss][self.w_poss + n] in self.item:
                 self.board[self.l_poss][self.w_poss] = ' '
@@ -274,8 +274,7 @@ class Game:
             else:
                 continue
 
-    def welcome_screen(self):
-        # import background / show: menu, credits, control panel
+    def welcome_screen(self):  # import background / show: menu, credits, control panel
         os.system('clear')
         with open('panda.txt', newline='') as screenfile:
             panda = screenfile.read()
@@ -305,7 +304,7 @@ class Game:
                 os.system('clear')
                 continue
 
-    def game_over_screen(self):
+    def game_over_screen(self):  # show game over screen (imported from file)
         while True:
             self.sum_items = [0, 0, 0]
             os.system('clear')
@@ -322,8 +321,7 @@ class Game:
             else:
                 continue
 
-    def credits_screen(self):
-        # import background - with credits info
+    def credits_screen(self):  # show credits screen (imported from file)
         while True:
             os.system('clear')
             with open('credits.txt', newline='') as credits:
@@ -336,8 +334,7 @@ class Game:
             else:
                 continue
 
-    def win_screen(self):
-        # import background - congratulations!
+    def win_screen(self):  # show win screen (imported from file)
         while True:
             os.system('clear')
             with open('victoryscreen.txt', newline='') as vin:
@@ -352,7 +349,7 @@ class Game:
             else:
                 continue
 
-    def reset(self):
+    def reset(self):  # reset the lists, variables, and dictionary to play again the game
         dic = vars(self)
         no_edit = ['obstacle', 'item', 'lives', 'sum_items']
         to_zero = ['l_poss', 'w_poss']
@@ -362,7 +359,7 @@ class Game:
             if i not in no_edit and i not in to_zero:
                 dic[i] = []
 
-    def level(self, level):
+    def level(self, level):  # set the levels, insert a player, and change colors of map
         self.reset()
         board = self.game_board(22, 80)
         self.random_item(board, self.item)
@@ -380,7 +377,7 @@ class Game:
             self.insert_player(board, 3)
             self.game_play('\33[91m')
 
-    def level_2_screen(self):
+    def level_2_screen(self):  # print level info screen (import from file)
         os.system('clear')
         with open('level2.txt', newline='') as level_2:
             level = level_2.read()
@@ -388,7 +385,7 @@ class Game:
         time.sleep(3)
         os.system('clear')
 
-    def level_3_screen(self):
+    def level_3_screen(self):  # print level info screen (import from file)
         os.system('clear')
         with open('level3.txt', newline='') as level_3:
             level = level_3.read()
