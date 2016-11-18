@@ -295,6 +295,7 @@ class Game:
                 self.credits_screen()
                 break
             else:
+                os.system('clear')
                 continue
 
     def game_over_screen(self):
