@@ -276,6 +276,13 @@ class Game:
 
     def welcome_screen(self):
         # import background / show: menu, credits, control panel
+        os.system('clear')
+        with open('panda.txt', newline='') as screenfile:
+            panda = screenfile.read()
+            print('{}'.format(panda))
+            time.sleep(6)
+            screenfile.close()
+            os.system('clear')
         while True:
             with open('welcomescreen.txt', newline='') as screenfile:
                 welcome = screenfile.read()
@@ -362,16 +369,16 @@ class Game:
         if level == 1:
             self.level_1(board)
             self.insert_player(board, 1)
-            self.game_play('\033[91m')
+            self.game_play('\33[96m')
         if level == 2:
             self.level_2(board)
             self.insert_player(board, 2)
-            self.game_play('\033[92m')
+            self.game_play('\33[93m')
         if level == 3:
             self.level_3(board)
             self.boss_appear(self.board)
             self.insert_player(board, 3)
-            self.game_play('\033[95m')
+            self.game_play('\33[91m')
 
     def level_2_screen(self):
         os.system('clear')
