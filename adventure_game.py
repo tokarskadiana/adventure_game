@@ -402,7 +402,7 @@ class Game:
             self.level_3(board)
             self.boss_appear(self.board)
             self.insert_player(board, 3)
-            self.game_play('\33[91m')
+            self.game_play('\33[95m')
 
     def level_2_screen(self):  # print level info screen (import from file)
         os.system('clear')
@@ -426,14 +426,14 @@ class Game:
         self.lives = ['lives 💜'] * 5
         n = self.chose_hard()
         leng = self.hard_hung(self.hard)
-        self.welcome_screen()
-        self.level(1, n)
-        self.level_2_screen()
-        self.level(2, n)
-        t = hang(self.sum_items, leng)
-        if t:
-            self.game_over_screen()
-        self.level_3_screen()
+        # self.welcome_screen()
+        # self.level(1, n)
+        # self.level_2_screen()
+        # self.level(2, n)
+        # t = hang(self.sum_items, leng)
+        # if t:
+        #     self.game_over_screen()
+        # self.level_3_screen()
         self.level(3, n)
         a = hot_cold(len(self.lives))
         if a:
