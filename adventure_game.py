@@ -4,6 +4,7 @@ import sys
 import random
 from hung import hang
 import time
+from Hot_cold_warm import hot_cold
 
 
 class Game:
@@ -31,7 +32,7 @@ class Game:
         return self.board
 
     def random_item(self, board, item):
-        for z in range(1):
+        for z in range(10):
             for i in item:
                 x = random.randint(0, (len(board) - 1))
                 y = random.randint(0, (len(board[0]) - 1))
@@ -46,9 +47,9 @@ class Game:
             c += row.count('👘')
         return f, c, w
 
-    def print_game_board(self, board):  # print game board
+    def print_game_board(self, board, col):  # print game board
         for i in board:
-            print(''.join(i))
+            print('{}{}\033[0m'.format(col, ''.join(i)))
 
     def define_level(self, board, x, y, ran, z=False):
         if z:
@@ -160,7 +161,7 @@ class Game:
         if level == 1:
             board[len(board) // 2][len(board[0]) // 2 - 1] = '🐼'
         if level == 2:
-            board[2][-75] = '🐼'
+            board[2][-7] = '🐼'
         if level == 3:
             board[10][-5] = '🐼'
         n = 0
@@ -230,7 +231,7 @@ class Game:
                 self.l_poss = self.l_poss + n
                 self.board[self.l_poss][self.w_poss] = '🐼'
 
-    def game_play(self):  # function of a gameplay, waiting for player input
+    def game_play(self, col):  # function of a gameplay, waiting for player input
         while True:
             bs = ('.', '/', '|', '-', '^', "'", '*')
             os.system('clear')
@@ -251,7 +252,7 @@ class Game:
                 break
             elif self.board[self.l_poss + 1][self.w_poss] in bs:
                 break
-            self.print_game_board(self.board)
+            self.print_game_board(self.board, col)
             print('Use A (left), S (down), D (right) and W(up) to move.\nPress E to exit.\n')
             self.print_items()
             player_input = self.getch().lower()
@@ -278,13 +279,13 @@ class Game:
         while True:
             with open('welcomescreen.txt', newline='') as screenfile:
                 welcome = screenfile.read()
-                print('\033[36m\033[92m', welcome, '\033[0m')
+                print('\033[36m\033[92m{}\033[0m'.format(welcome))
             start_input = input()
             if start_input == 'y':
                 os.system('clear')
                 with open('level1.txt', newline='') as level_1:
                     level = level_1.read()
-                    print('\033[1m\033[95m', level, '\033[0m')
+                    print('\033[1m\033[95m{}\033[0m'.format(level))
                     time.sleep(3)
                     os.system('clear')
                 break
@@ -298,10 +299,11 @@ class Game:
 
     def game_over_screen(self):
         while True:
+            self.sum_items = [0, 0, 0]
             os.system('clear')
             with open('gameover.txt', newline='') as game_over:
                 over = game_over.read()
-                print('\033[1m\033[91m', over, '\033[0m')
+                print('\033[1m\033[91m{}\033[0m'.format(over))
             end_input = input()
             if end_input == 'y':
                 self.main()
@@ -318,7 +320,7 @@ class Game:
             os.system('clear')
             with open('credits.txt', newline='') as credits:
                 credits_page = credits.read()
-                print('\033[1m\033[95m', credits_page, '\033[0m')
+                print('\033[1m\033[95m{}\033[0m'.format(credits_page))
             credits_input = input()
             if credits_input == 'b':
                 self.main()
@@ -332,7 +334,7 @@ class Game:
             os.system('clear')
             with open('victoryscreen.txt', newline='') as vin:
                 vin_page = vin.read()
-                print('\033[1m\033[92m', vin_page, '\033[0m')
+                print('\033[1m\033[92m{}\033[0m'.format(vin_page))
             vin_input = input()
             if vin_input == 'y':
                 self.main()
@@ -359,20 +361,22 @@ class Game:
         if level == 1:
             self.level_1(board)
             self.insert_player(board, 1)
+            self.game_play('\033[91m')
         if level == 2:
             self.level_2(board)
             self.insert_player(board, 2)
+            self.game_play('\033[92m')
         if level == 3:
             self.level_3(board)
             self.boss_appear(self.board)
             self.insert_player(board, 3)
-        self.game_play()
+            self.game_play('\033[95m')
 
     def level_2_screen(self):
         os.system('clear')
         with open('level2.txt', newline='') as level_2:
             level = level_2.read()
-            print('\033[1m\033[95m', level, '\033[0m')
+            print('\033[1m\033[95m{}\033[0m'.format(level))
         time.sleep(3)
         os.system('clear')
 
@@ -380,7 +384,7 @@ class Game:
         os.system('clear')
         with open('level3.txt', newline='') as level_3:
             level = level_3.read()
-            print('\033[1m\033[95m', level, '\033[0m')
+            print('\033[1m\033[95m{}\033[0m'.format(level))
         time.sleep(3)
         os.system('clear')
 
@@ -388,16 +392,18 @@ class Game:
         self.reset()
         os.system('clear')
         self.lives = ['lives 💜'] * 5
-        # self.welcome_screen()
-        # self.level(1)
-        # self.level_2_screen()
-        # self.level(2)
-        # t = hang(self.sum_items)
-        # if t:
-        #     self.game_over_screen()
+        self.welcome_screen()
+        self.level(1)
+        self.level_2_screen()
+        self.level(2)
+        t = hang(self.sum_items)
+        if t:
+            self.game_over_screen()
         self.level_3_screen()
         self.level(3)
-        # hot_cold()
+        a = hot_cold(len(self.lives))
+        if a:
+            self.game_over_screen()
         self.win_screen()
 
     if __name__ == 'main':
