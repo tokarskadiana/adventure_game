@@ -20,6 +20,7 @@ class Game:
         self.clothes = []
         self.weapons = []
         self.sum_items = [0, 0, 0]
+        self.hard = ''
 
     def game_board(self, lenght, width):    # make a game board
         for row in range(lenght):
@@ -31,8 +32,8 @@ class Game:
                     self.board[row].append(' ')
         return self.board
 
-    def random_item(self, board, item):
-        for z in range(10):
+    def random_item(self, board, item, rang):
+        for z in range(rang):
             for i in item:
                 x = random.randint(0, (len(board) - 1))
                 y = random.randint(0, (len(board[0]) - 1))
@@ -354,10 +355,36 @@ class Game:
             if i not in no_edit and i not in to_zero:
                 dic[i] = []
 
-    def level(self, level):
+    def hard_hung(self, hard):
+        if hard == 1:
+            return 5
+        elif hard == 2:
+            return 7
+        elif hard == 3:
+            return 10
+
+    def chose_hard(self):
+        while True:
+            os.system('clear')
+            self.hard = input('Chose difficulty (1, 2, 3):')
+            if len(self.hard) != 1:
+                continue
+            try:
+                self.hard = int(self.hard)
+                break
+            except ValueError:
+                continue
+        if self.hard == 1:
+            return 10
+        if self.hard == 2:
+            return 7
+        if self.hard == 3:
+            return 5
+
+    def level(self, level, n):
         self.reset()
         board = self.game_board(22, 80)
-        self.random_item(board, self.item)
+        self.random_item(board, self.item, n)
         if level == 1:
             self.level_1(board)
             self.insert_player(board, 1)
@@ -392,15 +419,17 @@ class Game:
         self.reset()
         os.system('clear')
         self.lives = ['lives 💜'] * 5
+        n = self.chose_hard()
+        leng = self.hard_hung(self.hard)
         self.welcome_screen()
-        self.level(1)
+        self.level(1, n)
         self.level_2_screen()
-        self.level(2)
-        t = hang(self.sum_items)
+        self.level(2, n)
+        t = hang(self.sum_items, leng)
         if t:
             self.game_over_screen()
         self.level_3_screen()
-        self.level(3)
+        self.level(3, n)
         a = hot_cold(len(self.lives))
         if a:
             self.game_over_screen()

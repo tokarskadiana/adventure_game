@@ -3,11 +3,11 @@ import os
 import time
 
 
-def make_capitals():
+def make_capitals(leng):
     capitals = []
     with open("capitals.txt", "r") as capital:
         for item in capital:
-            if len(item) < 7:
+            if len(item) < leng:
                 capitals.append(item.replace('\n', ''))
         capital.close()
         cap_name = list(random.choice(capitals))
@@ -17,7 +17,10 @@ def make_capitals():
 def make_dashes(capital):
     cap_name_output = []
     for letter in capital:
-        cap_name_output.append('_ ')
+        if letter == ' ':
+            cap_name_output.append('* ')
+        else:
+            cap_name_output.append('_ ')
     return cap_name_output
 
 
@@ -67,8 +70,8 @@ Next time I will win!!''')
             break
 
 
-def hang(lives):
-    capital = make_capitals()
+def hang(lives, leng):
+    capital = make_capitals(leng)
     dash = make_dashes(capital)
     introduce()
     g = game(capital, dash, lives)
